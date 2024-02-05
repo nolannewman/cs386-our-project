@@ -1,0 +1,7 @@
+Download Docker and nodejs
+
+Run: 1. cd pathto/cs386-our-project
+     2. docker build -t cs386-our-project .
+     3. docker run -p 3000:3000 cs386-our-project
+
+Go to http://localhost:3000

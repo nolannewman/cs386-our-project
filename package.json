@@ -1,0 +1,13 @@
+{
+  "name": "cs386-our-project",
+  "version": "1.0.0",
+  "description": "A calorie tracker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
