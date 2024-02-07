@@ -12,4 +12,4 @@ nutrients, calorie intake, burnt calories, and more.
 * Alonso Jimenez
 
 # License
-This project is protected under the MIT License. See (docs/LICENSE.md) for more.
+This project is protected under the MIT License. See [LICENSE.md] (https://github.com/nolannewman/cs386-our-project/blob/main/LICENSE.md) for more.
