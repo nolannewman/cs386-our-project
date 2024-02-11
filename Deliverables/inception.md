@@ -1,7 +1,7 @@
-##1. Introduction: 
+## 1. Introduction: 
 Our project "Muscle Memory" for the CS386 course at NAU aims to provide a novel solution for individuals to effectively monitor their nutritional intake and physical activity. By integrating features for tracking nutrients, calorie consumption, burnt calories, and additional relevant data, Muscle Memory offers users a comprehensive tool to manage their health and fitness goals in an engaging and user-friendly manner.
 
-##2. IVP:
+## 2. IVP:
 "Muscle Memory" empowers users to effortlessly track nutrition, manage weight, engage with a supportive community, learn about nutrition, plan personalized diets, seamlessly integrate fitness routines, set achievable health goals, and monitor progress – all within a single, user-friendly platform.
 Initial Consumer Segments: 
 Track nutrition
@@ -13,8 +13,8 @@ Track nutrition
    	Set health goals
 	Monitor progress
 
-##3. Interview Summaries
-###Interview 1:
+## 3. Interview Summaries
+### Interview 1:
 Summary: Could be beneficial to have notification reminders for nutrition. User should be able to make goals for themselves.
 Interviewer: Braden Wendt
 Interviewee: Tye Kassen
@@ -41,7 +41,7 @@ Assessment: Must have / Nice to have / Don’t care
    	Set health goals(nice to have)
 	  Monitor progress(nice to have)
  
-###Interview 2:
+### Interview 2:
 Summary: The interviewee was keen on the application being user friendly and accessible to as many users as possible.
 Interviewer: Ryan Lucero
 Interviewee: Jack brown
@@ -72,7 +72,7 @@ Assessment: Must have / Nice to have / Don’t care
     	Set health goals:  extra feature
     	Monitor progress:  extra feature
 
-###Interview 3:
+### Interview 3:
 Summary: Could be beneficial to have notification reminders for nutrition. Should be able to easily tailor what the goals are. 
 Interviewer: Ryan Lucero
 Interviewee :Hunter Larson
@@ -97,7 +97,7 @@ Assessment: Must have / Nice to have / Don’t care
    	Set health goals
 	Monitor progress
 
-###Interview 4:
+### Interview 4:
 Summary: I want to be able to track my calories and macros and input my own food.
 Interviewer: Nolan
 Interviewee: Ryan Morin
@@ -125,7 +125,7 @@ Assessment: Must have / Nice to have / Don’t care
     	Set health goals: Nice to have
     	Monitor progress: Must have
  
-###Interview 5:
+### Interview 5:
 Summary: Wants to be able to plan his diet, doesn't care for fitness info.
 Interviewer: Nolan
 Interviewee: Ryan Kuechle
@@ -153,7 +153,7 @@ Assessment: Must have / Nice to have / Don’t care
     	Set health goals: Don’t care
     	Monitor progress: Must have
 
-###Interview 6:
+### Interview 6:
 Summary: User expectations for a calorie counter app center on ease of use, a detailed food database, personalization, motivational features, and integration with health devices.
 Interviewer: Drake
  Interviewee: Damian Ortiz
@@ -178,7 +178,7 @@ Learn about nutrition (Don’t care)
 Plan diet (Must)
 Integrate fitness (Don’t care)
 
-###Interview 7:
+### Interview 7:
 Summary: The interviewee discussed how important it is to have personality in the app, in any and every form possible.
 Interviewer: Alonso Jimenez
 Interviewee: Nicole Anguiano
@@ -206,7 +206,7 @@ Assessment: Must have / Nice to have / Don’t care
    	Set health goals - MUST HAVE
 	Monitor progress - MUST HAVE
  
-###Interview 8:
+### Interview 8:
 Summary: Interviewee discussed how it does not have to be a complex app, as long as the basics are laid out simply in a true and effective manner, that is all that is necessary.
 Interviewer: Nicholas Gonzalez
 Interviewee: Jackson Kravchak
@@ -234,7 +234,7 @@ Assessment: Must have / Nice to have / Don’t care
         Set health goals (Must)
        	Monitor progress (Must)
         
-###Interview 9:
+### Interview 9:
 Summary: Was interested in more capability past just calorie counting. Would be interested in how fitness is calculated in the calorie counter itself. 
 Interviewer: Braden Wendt
 Interviewee: Tristan Weinman
@@ -260,7 +260,7 @@ Assessment: Must have / Nice to have / Don’t care
    	Set health goals(nice to have)
 	  Monitor progress(nice to have)
 
-###Interview 10:
+### Interview 10:
 Summary: This interview aimed to understand the needs and preferences of Army Reserve members regarding health and fitness tracking.
 Interviewer: Alonso Jimenez
 Interviewee: Ivette Jimenez
@@ -285,7 +285,7 @@ Assessment: Must have / Nice to have / Don’t care
    	Set health goals - Must have
 	Monitor progress - Must have
 
-##4. Final Value Proposition
+## 4. Final Value Proposition
 Final Value Proposition: "Muscle Memory" enables users to seamlessly track nutrition, monitor progress, and set personalized health goals for optimal fitness and well-being.
 
 
