@@ -2,18 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holy Grail Layout</title>
+    <title>Muscle Memory</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/dd0acfc30a.js"></script>
+    <link rel="icon" type="image/png" href="images/muscle.png" />
 </head>
 <body>
-    <div class="container">
-        <header>Muscle Memory</header>
-        <nav>Navigation</nav>
-        <main>Content Area</main>
-        <aside class="right-sidebar">Links</aside>
-        <footer>Footer</footer>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logoImage.jpg"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <!--We can create simple about us webpage-->
+                        <li><a href="./">Home</a></li>
+                        <li><a href="./" >About us</a></li>
+
+                    </ul>
+                
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+
+ <div class="text-box">
+    <h1>Muscle Memory </h1>
+    <p>This Website is intended for our users to keep up with their nutrition
+       <br> and keep striving for better health.
+    </p>
+    <a href="./" target="blank" class="hero-btn">Sign up Today and help us help you achieve your goals.</a>
+</div>
+
+</section>
+
+<!--- This is the goal section-->
+<section class="goals">
+    <h1>Pick your goal!</h1>
+    <p>We offer various different goals for our users. Just simply pick what you aim to achieve and click on the images 
+        for more information that will help you reach better health.
+    </p>
+
+    <div class="row">
+        <div class="food-col">
+            <!-- Update the href attribute with the URL of the target page for Cutting diet -->
+            <a href="url-for-cutting-diet-page.html">
+                <img src="images/pictureofhealthyfood.jpg" alt="Picture of Healthy food to indicate a weight loss diet.">
+                <div class="layer">
+                    <h3>Cutting</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="food-col">
+            <!-- Update the href attribute with the URL of the target page for Protein diet -->
+            <a href="url-for-protein-diet-page.html">
+                <img src="images/protien.jpg" alt="Picture of high protein food to indicate a bulking diet.">
+                <div class="layer">
+                    <h3>Bulking</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="food-col">
+            <!-- Update the href attribute with the URL of the target page for Maintaining diet -->
+            <a href="url-for-maintaining-diet-page.html">
+                <img src="images/balancedFood.jpg" alt="Picture of balanced food to indicate a maintenance diet.">
+                <div class="layer">
+                    <h3>Maintaing</h3>
+                </div>
+            </a>
+        </div>
     </div>
+
+</section>
+<!--User Reviews-->
+<section class="testimonials">
+    <h1>Reviews From Our Users </h1>
+    <p> Here are some reviews that our customers left on our website! </p>
+
+
+    <div class="row">
+        <div class="testimonial-col">
+            <img src="images/userPhoto1.jpg" alt="Photo of user">
+            <div>
+            <p> I love the application. It helped me track my calories and loose over 10 pounds! <p>
+            <h3>Jacob</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+            </div>
+        </div>
+
+        <div class="testimonial-col">
+            <img src="images/userPhoto2.jpg" alt="Photo of user">
+            <div>
+                <p> My friend told me that he used this application to bulk up during the winter. I used the app all throughout the winter and 
+                    I was able to gain plent of muscle. I love this app. 
+                </p>
+                    <h3>Steven</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--Footer-->
+<section class="footer">
+
+    <h4>About Us</h4>
+    <p>We are computer science students at Northern Arizona University.</p>
+    
+    <div class="icons">
+       
+        <i><a href="https://github.com/nolannewman/cs386-our-project" class="fa fa-github"></a></i>
+        <i><a href="https://www.linkedin.com/in/ryan-lucero-811012260/" class="fa fa-linkedin"></a></i>
+        <i class="fa fa- fa-envelope"></i>
+    </div>
+</section>
+
+
+
+
+
+<!--   JAVASCRIPT  FOR TOGGLE MENU -->
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
 </body>
 </html>
-
