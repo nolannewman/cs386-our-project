@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Calculator</title>
+</head>
+<body>
+    <h1>Diet Calculator</h1>
+    <form id="dietForm">
+        <p>Choose your diet type:</p>
+        <button type="button" onclick="setDietType('cut')">Cut</button>
+        <button type="button" onclick="setDietType('bulk')">Bulk</button>
+        <button type="button" onclick="setDietType('maintenance')">Maintenance</button>
+        <br><br>
+        <label for="burnedCalories">Enter your daily burned calories:</label>
+        <input type="number" id="burnedCalories" name="burnedCalories" required>
+        <br><br>
+        <button type="submit">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function setDietType(diet) {
+            document.getElementById('dietType').value = diet;
+        }
+
+        document.getElementById('dietForm').onsubmit = function(event) {
+            event.preventDefault();
+            var dietType = document.getElementById('dietType').value;
+            var burnedCalories = parseFloat(document.getElementById('burnedCalories').value);
+            var resultDiv = document.getElementById('result');
+
+            var calculatedCalories;
+            if (dietType === 'cut') {
+                calculatedCalories = burnedCalories - 500;
+            } else if (dietType === 'bulk') {
+                calculatedCalories = burnedCalories + 500;
+            } else if (dietType === 'maintenance') {
+                calculatedCalories = burnedCalories;
+            }
+
+            resultDiv.innerHTML = "<p>For your " + dietType + " diet, you need to consume " + calculatedCalories + " calories per day.</p>";
+        };
+    </script>
+</body>
+</html>
