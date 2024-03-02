@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/muscle.png" />
     <title>Diet Calculator</title>
 </head>
 <body>
-    <h1>Diet Calculator</h1>
+    <h1 id="pageTitle">Diet Calculator</h1>
     <form id="dietForm">
         <p>Choose your diet type:</p>
-        <button type="button" onclick="setDietType('cut')">Cut</button>
-        <button type="button" onclick="setDietType('bulk')">Bulk</button>
-        <button type="button" onclick="setDietType('maintenance')">Maintenance</button>
+        <button class="hero-btn" onclick="setDietType('cut')">Cut</button>
+        <button class="hero-btn" onclick="setDietType('bulk')">Bulk</button>
+        <button class="hero-btn" onclick="setDietType('maintenance')">Maintenance</button>
         <br><br>
         <label for="burnedCalories">Enter your daily burned calories:</label>
         <input type="number" id="burnedCalories" name="burnedCalories" required>
