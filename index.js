@@ -1,62 +1,95 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-const port = 3000;
-const host = '0.0.0.0';
+const express = require('express')
+const app = express()
+const bcrypt = require('bcrypt')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
 
-const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  const pathname = parsedUrl.pathname;
-  let filePath = '.' + pathname;
+const initializePassport = require('./passport-config')
+initializePassport(
+  passport, 
+  email => users.find(user => user.email === email),
+  id => users.find(user => user.id === id)
+)
 
-  if (filePath.includes('/CalorieFunctions')) {
-    // check for query
-    const query = parsedUrl.query;
-    // log parameters for debugging
-    //console.log('Accessing calorie functions with query params:', query);
+const users = []
 
-    // if query goal doesn't exist
-    if (!query.goal) {
-      // set to maintaining as default val
-      const newUrl = req.url + (req.url.includes('?') ? '&' : '?') + 'goal=MAINTAINING';
-      res.writeHead(302, { Location: newUrl });
-      res.end();
-      return; 
-    }
+app.set('view-engine', 'ejs')
+app.use(express.urlencoded({ extended: false}))
+app.use(express.static('public'))
+app.use(flash())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUnitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
+
+app.get('/', (req, res) => {
+  res.render('index.ejs', {isAuthenticated: req.isAuthenticated(), name: req.user ? req.user.name : ''})
+})
+
+app.get('/login', checkNotAuthenticated, (req, res) => {
+  res.render('login.ejs')
+})
+
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}))
+
+app.get('/register', checkNotAuthenticated, (req, res) => {
+  res.render('register.ejs')
+})
+
+app.post('/register', checkNotAuthenticated, async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    users.push({
+      id: Date.now().toString(),
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword
+    })
+    res.redirect('/login')
+  } catch {
+    res.redirect('/register')
+  }
+  console.log(users)
+})
+
+app.get('/CalorieFunctions', checkNotAuthenticated, (req, res) => {
+  res.sendFile('index.html', { root: 'public/CalorieFunctions' })
+})
+
+app.delete('/logout', (req, res) => {
+  req.logOut(function(err) {
+    if(err) { return next(err) }
+    res.redirect('/')
+  })
+})
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
   }
 
-  if (filePath === './') {
-    filePath = './public/index.html';
-  } else {
-    filePath = filePath.startsWith('./public/') ? filePath : './public' + pathname;
+  res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next ) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/')
   }
+  next()
+}
 
-  const extname = path.extname(filePath).toLowerCase();
-  const mimeTypes = {
-    '.html': 'text/html',
-    '.css': 'text/css',
-  };
-
-  const contentType = mimeTypes[extname] || 'application/octet-stream';
-
-  fs.readFile(filePath, (error, content) => {
-    if (error) {
-      if (error.code === 'ENOENT') {
-        res.writeHead(404, { 'Content-Type': 'text/html' });
-        res.end('404 Not Found');
-      } else {
-        res.writeHead(500);
-        res.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
-      }
-    } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
-    }
-  });
-});
-
-server.listen(port, host, () => {
-  console.log(`Server running at http://${host}:${port}/`);
-});
+app.listen(3000)
