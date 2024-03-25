@@ -50,6 +50,14 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register.ejs')
 })
 
+app.get('/blog', (req, res) => {
+  res.render('blog.ejs')
+})
+
+app.get('/Resources', (req, res) => {
+  res.render('Resources.ejs')
+})
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
