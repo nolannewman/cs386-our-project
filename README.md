@@ -31,7 +31,7 @@ users to as well.
 Please visit our CONTRIBUTING.md file for information on contributing.
 
 ## Versioning
-We use semantic versioning for versioning. 
+We use semantic versioning for versioning. For our current version, please see [our tags here.](https://github.com/nolannewman/cs386-our-project/blob/main/VERSIONS.md)
 
 ## Authors
 * Nolan Newman
