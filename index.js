@@ -18,6 +18,7 @@ initializePassport(
 )
 
 const users = []
+let posts = []
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false}))
@@ -50,8 +51,20 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register.ejs')
 })
 
-app.get('/blog', (req, res) => {
+app.get('/blog', checkAuthenticated, (req, res) => {
   res.render('blog.ejs')
+})
+
+app.post('/post', (req, res) => {
+  const { topic, comment } = req.body
+  console.log(topic, comment)
+  posts.push({ topic, comment })
+
+  res.redirect('/posts')
+})
+
+app.get('/posts', (req, res) => {
+  res.render('posts.ejs', { posts })
 })
 
 app.get('/Resources', (req, res) => {
@@ -74,7 +87,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
   console.log(users)
 })
 
-app.get('/CalorieFunctions', checkNotAuthenticated, (req, res) => {
+app.get('/CalorieFunctions', (req, res) => {
   res.sendFile('index.html', { root: 'public/CalorieFunctions' })
 })
 

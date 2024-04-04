@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Discussion Board</title>
+    <title>Create New Post</title>
 </head>
 <body>
     <header>
-        <h1>Discussion Board</h1>
+        <h1>Create a New Post</h1>
     </header>
 
     <main>
-        <!-- Topics and comments will be dynamically added here -->
+        <form action="/post" method="POST">
+            <label for="topic">Topic:</label>
+            <input type="text" id="topic" name="topic" required>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" required></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <a href="posts">Back<a>
+        <a href="/">Home<a>
     </main>
-
-    <footer>
-        <p>Copyright © 2024 Discussion Board. All rights reserved.</p>
-    </footer>
 </body>
 </html>
