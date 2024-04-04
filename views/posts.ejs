@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Posts</title>
+</head>
+<body>
+    <header>
+        <h1>All Posts</h1>
+    </header>
+
+    <main>
+        <% posts.forEach(function(post) { %>
+            <div>
+                <h2><%= post.topic %></h2>
+                <p><%= post.comment %></p>
+            </div>
+        <% }); %>
+        <a href="blog">Post a new comment!<a>
+        <a href="/">Home<a>
+    </main>
+</body>
+</html>
