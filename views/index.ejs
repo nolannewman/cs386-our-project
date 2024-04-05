@@ -22,14 +22,14 @@
                         <!--We can create simple about us webpage-->
                         <li><a href="./">Home</a></li>
                         <li><a href="./" >About us</a></li>
-                        <li><a href="./CalorieFunctions" >Calorie Calculator</a></li>
+                        <li><a href="./calories" >Calorie Calculator</a></li>
                         <li><a href="./">Food Log</a></li>
                         <li><a href="./">Exercise Log</a></li>
                         <li><a href="./posts">Blog</a></li>
                         <li><a href="./Resources">Resources</a></li>
                         <!--- only show settings if logged in -->
                         <% if (isAuthenticated) { %>
-                        <li><a href="./">Settings</a></li>
+                        <li><a href="./settings">Settings</a></li>
                         <% } %>
                     </ul>
                 
@@ -56,7 +56,7 @@
     </p>
     <!--- Check to show register or log food -->
     <% if (isAuthenticated) { %>
-    <a href="/CalorieFunctions" class="hero-btn">See your maintenance calories and get ready to track your nutrition today</a>
+    <a href="/calories" class="hero-btn">See your maintenance calories and get ready to track your nutrition today</a>
     <% } else { %>
     <a href="/register" class="hero-btn">Sign up Today and help us help you achieve your goals.</a>
     <% } %>
@@ -74,7 +74,7 @@
     <div class="row">
         <div class="food-col">
             <!--- URL to calorie calculator with cutting selected-->
-            <a href="/CalorieFunctions/index.html?goal=CUTTING">
+            <a href="/calories?goal=CUTTING">
                 <img src="images/pictureofhealthyfood.jpg" alt="Picture of Healthy food to indicate a weight loss diet.">
                 <div class="layer">
                     <h3>Cutting</h3>
@@ -84,7 +84,7 @@
 
         <div class="food-col">
             <!--- URL to calorie calculator with bulking selected-->
-            <a href="/CalorieFunctions/index.html?goal=BULKING">
+            <a href="/calories?goal=BULKING">
                 <img src="images/protien.jpg" alt="Picture of high protein food to indicate a bulking diet.">
                 <div class="layer">
                     <h3>Bulking</h3>
@@ -94,7 +94,7 @@
 
         <div class="food-col">
             <!--- URL to calorie calculator with maintaining selected-->
-            <a href="/CalorieFunctions/index.html?goal=MAINTAINING">
+            <a href="/calories?goal=MAINTAINING">
                 <img src="images/balancedFood.jpg" alt="Picture of balanced food to indicate a maintenance diet.">
                 <div class="layer">
                     <h3>Maintaing</h3>
