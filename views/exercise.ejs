@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise Log</title>
+</head>
+<body>
+    <header>
+        <h1>Exercise Log</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Log Steps</h2>
+            <form action="/addExercise" method="POST">
+
+                <label for="calories_eaten">Steps:</label>
+                <input type="number" id="steps" name="steps" required>
+
+                <button type="submit">Submit</button>
+            </form>
+            <h2>Log Other</h2>
+            <form action="/addExercise" method="POST">
+
+                <label for="calories_eaten">Calories burnt:</label>
+                <input type="number" id="calories" name="calories" required>
+
+                <button type="submit">Submit</button>
+            </form>
+            <h2>Calories Burnt Today</h2>
+            <p><%= totalCalories %></p>
+            <h2>Steps for the day</h2>
+            <p><%= totalSteps %></p>
+        </section>
+        <a href="/">Home</a>
+        <a href="/foodlog">Food log</a>
+        <a href="/dashboard">Dashboard</a>
+    </main>
+</body>
+</html>

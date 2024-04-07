@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS muscleMemory;
+
+SHOW DATABASES;
+CREATE DATABASE IF NOT EXISTS muscleMemory;
+USE muscleMemory;
+CREATE TABLE mmUser(
+  username VARCHAR(32) PRIMARY KEY NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  pword VARCHAR(75) NOT NULL,
+  bmr DOUBLE
+);
+
+CREATE TABLE blogPost(
+  post_id INT PRIMARY KEY NOT NULL,
+  title VARCHAR(30) NOT NULL,
+  content VARCHAR(255) NOT NULL,
+  poster VARCHAR(32) NOT NULL
+);
+
+SHOW tables;
+
+SELECT * FROM mmUser;
+SELECT * FROM blogPost;

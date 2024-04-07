@@ -13,10 +13,10 @@ const methodOverride = require('method-override')
 const flash = require('connect-flash')
 
 const userdb = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'PASSWORD',
-  database: 'muscleMemory'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 })
 
 userdb.connect((err) => {
@@ -81,7 +81,6 @@ app.post('/update-email', (req, res) => {
     const name = req.user.username
     const query = 'UPDATE mmUser SET email = ? WHERE username = ?'
 
-    // check if email used
     userdb.query("SELECT * FROM mmUser WHERE email = ?", [email], (err, results) => {
         if (err) {
             console.error('Error checking existing users:', err)
@@ -111,11 +110,9 @@ app.post('/update-password', (req, res) => {
     const newpword = bcrypt.hashSync(newpassword, 8)
     const query = 'UPDATE mmUser SET pword = ? WHERE username = ?'
 
-    // check if passwords match
     bcrypt.compare(oldpassword, req.user.pword, (err, isMatch) => {
         if(err) return done(err);
         if( isMatch ) {
-            // rewrite password
             userdb.query(query, [newpword, name], (error, results) => {
                 if(error) {
                     console.error('Error updating password:', error)
@@ -133,43 +130,39 @@ app.post('/update-password', (req, res) => {
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login.ejs')
+    res.render('login.ejs')
 })
 
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('register.ejs')
+    res.render('register.ejs')
 })
 
 app.get('/blog', checkAuthenticated, (req, res) => {
-  res.render('blog.ejs')
+    res.render('blog.ejs')
+})
+
+app.get('/about', (req, res) => {
+    res.render('about.ejs')
 })
 
 app.post('/post', checkAuthenticated, (req, res) => {
-  const { title, content } = req.body
-  const poster = req.user.username
+    const { title, content } = req.body
+    const poster = req.user.username
 
-  userdb.query('SELECT COUNT(*) AS count FROM blogPost', (err, results) => {
-    if(err) {
-        console.error('Error counting posts:', err);
-    }
-
-    const postCount = results[0].count;
-    const post_id = postCount + 1;
-    const query = 'INSERT INTO blogPost (post_id, title, content, poster) VALUES (?, ?, ?, ?)'
-    userdb.query(query, [post_id, title, content, poster], (err, results) => {
+    const query = 'INSERT INTO blogPost (title, content, poster) VALUES (?, ?, ?)'
+    userdb.query(query, [title, content, poster], (err, results) => {
         if (err) {
             console.error('Error inserting post:', err)
             return res.status(500).send('An error occurred while posting.')
         }
         res.redirect('/posts')
-      })
-  })
+    })
 })
 
 app.get('/posts', (req, res) => {
@@ -181,6 +174,127 @@ app.get('/posts', (req, res) => {
         }
         res.render('posts.ejs', { posts: results });
     })
+})
+
+// does not properly pull stuff by the data when loading
+app.get('/foodlog', checkAuthenticated, (req, res) => {
+
+    const name = req.user.username;
+    const currentDate = new Date().toISOString().slice(0, 10);
+
+    const query = 'SELECT * FROM foodLog WHERE username = ? AND day_eaten = ?';
+
+    userdb.query(query, [ name, currentDate ], (err, results) => {
+        if(err) {
+            console.error('Error accessing food log:', err);
+            return res.status(500).send('An error occurred accessing food log.');
+        }
+        res.render('foodlog.ejs', {foodLogs: results});
+    })
+})
+
+app.get('/dashboard', checkAuthenticated, async (req, res) => {
+    const username = req.user.username;
+    const currentDate = new Date().toISOString().slice(0, 10);
+    const maintenance = req.user.bmr;
+
+    const query = 'SELECT SUM(calories_burnt) AS totalBurnt FROM exerciseLog where username = ? AND day_logged = ?';
+
+    userdb.query(query, [username, currentDate], (err, results) => {
+        if(err) {
+            console.error('Error accessing exerciseLog:', err);
+            return res.status(500).send('An error occurred accessing exercise log.');
+        }
+        const totalBurnt = results[0].totalBurnt;
+        userdb.query('SELECT SUM(calories_eaten) AS totalEaten FROM foodLog WHERE username = ? AND day_eaten = ?', [username, currentDate], (err, results) => {
+            if(err) {
+                console.error('Error accessing foodLog:', err);
+                return res.status(500).send('An error occurred accessing food log.');
+            }
+            const totalEaten = results[0].totalEaten;
+            res.render('dashboard.ejs', { username, maintenance, totalBurnt, totalEaten });
+        })
+    })
+})
+
+app.post('/addFood', (req, res) => {
+    const { food_name, calories_eaten, food_desc } = req.body;
+    const username = req.user.username;
+    const day_eaten = new Date().toISOString().slice(0, 10);
+
+    const query = 'INSERT INTO foodLog (food_name, food_desc, calories_eaten, day_eaten, username) VALUES (?, ?, ?, ?, ?)';
+    userdb.query(query, [food_name, food_desc, calories_eaten, day_eaten, username], (err, results) => {
+        if (err) {
+            console.error('Error inserting food:', err);
+            return res.status(500).send('An error occurred while adding food.');
+        }
+        res.redirect('/foodlog');
+    });
+});
+
+app.post('/editFood', (req, res) => {
+    const { food_id, food_name, calories_eaten, food_desc } = req.body;
+    const username = req.user.username;
+
+    const query = 'UPDATE foodLog SET food_name = ?, calories_eaten = ?, food_desc = ? WHERE food_id = ? AND username = ?';
+
+    userdb.query(query, [food_name, calories_eaten, food_desc, food_id, username], (err, results) => {
+        if (err) {
+            console.error('Error updating food:', err);
+            return res.status(500).send('An error occurred while updating the food item.');
+        }
+        res.redirect('/foodlog');
+    });
+});
+
+app.get('/exercise', checkAuthenticated, (req, res) => {
+    const name = req.user.username;
+    const currentDate = new Date().toISOString().slice(0, 10);
+
+    const query = 'SELECT SUM(calories_burnt) AS totalCalories FROM exerciseLog where username = ? AND day_logged = ?';
+
+    userdb.query(query, [name, currentDate], (err, results) => {
+        if(err) {
+            console.error('Error accessing exerciseLog:', err);
+            return res.status(500).send('An error occurred accessing exercise log.')
+        }
+        const totalCalories = results[0].totalCalories;
+        userdb.query('SELECT SUM(num_steps) AS totalSteps FROM exerciseLog where username = ? AND day_logged = ?', [name, currentDate], (err, results) => {
+            if(err) {
+                console.error('Error accessing steps:', err);
+                return res.status(500).send('An error occurred accessing steps for the day.');
+            }
+
+        const totalSteps = results[0].totalSteps;
+
+        res.render('exercise.ejs', { totalCalories, totalSteps });
+        });
+    });
+})
+
+app.post('/addExercise', (req, res) => {
+    const { steps, calories } = req.body;
+    const username = req.user.username;
+    const day_logged = new Date().toISOString().slice(0, 10);
+
+    if(steps) {
+        log_steps = steps;
+        calories_burnt = (steps / 1000) * 35;
+    }
+    else {
+        log_steps = 0;
+        calories_burnt = calories;
+    }
+
+    const query = 'INSERT INTO exerciseLog (num_steps, calories_burnt, day_logged, username) VALUES (?, ?, ?, ?)';
+
+    userdb.query(query, [log_steps, calories_burnt, day_logged, username], (err, results) => {
+        if(err) {
+            console.error('Error logging exercise:', err);
+            return res.status(500).send('An error occurred logging your exercise.');
+        }
+        res.redirect('/exercise');
+    });
 })
 
 app.get('/Resources', (req, res) => {
@@ -205,7 +319,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
         // If no existing user, proceed with registration
         const hashedPassword = bcrypt.hashSync(password, 8);
 
-        userdb.query('INSERT INTO mmUser (username, email, pword) VALUES (?, ?, ?)', [username, email, hashedPassword], (insertErr) => {
+        userdb.query('INSERT INTO mmUser (username, email, pword, bmr) VALUES (?, ?, ?, -1)', [username, email, hashedPassword], (insertErr) => {
             if (insertErr) {
                 console.error('Error during registration:', insertErr);
                 return res.status(500).send('An error occurred during registration.');
@@ -223,7 +337,6 @@ app.get('/calories', checkAuthenticated, (req, res) => {
 app.post('/update-calories', (req, res) => {
     const calculatedBMR = parseFloat(req.body.calculatedBMR)
     const name = req.user.username
-    console.log('BMR:', calculatedBMR)
     userdb.query('UPDATE mmUser SET bmr = ? WHERE username = ?', [calculatedBMR, name], (err, results) => {
         if(err) {
             console.error('Error updating BMR:', err)
@@ -257,4 +370,5 @@ function checkNotAuthenticated(req, res, next ) {
   next()
 }
 
+console.log('Server running on http://0.0.0.0:3000/');
 app.listen(3000)
