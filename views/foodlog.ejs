@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Log</title>
+</head>
+<body>
+    <header>
+        <h1>Food Log</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Add Food Item</h2>
+            <form action="/addFood" method="POST">
+                <label for="food_name">Food:</label>
+                <input type="text" id="food_name" name="food_name" required>
+
+                <label for="calories_eaten">Calories:</label>
+                <input type="number" id="calories_eaten" name="calories_eaten" required>
+
+                <label for="food_desc">Description (optional):</label>
+                <input type="text" id="food_desc" name="food_desc">
+
+                <button type="submit">Add</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Logged Food</h2>
+            <% foodLogs.forEach(function(log) { %>
+                <div>
+                    <p><strong>Food:</strong> <%= log.food_name %> (<%= log.calories_eaten %> Calories)</p>
+                    <% if (log.food_desc) { %>
+                        <p><strong>Description:</strong> <%= log.food_desc %></p>
+                    <% } %>
+
+                    <!-- Pass the entire log object to openEditModal -->
+                    <button type="button" onclick='openEditModal(<%= JSON.stringify(log) %>)'>Edit</button>
+                </div>
+            <% }); %>
+        </section>
+    </main>
+
+    <!-- Modal structure -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <form id="editForm" action="/editFood" method="POST">
+                <input type="hidden" name="food_id" id="edit_food_id">
+                <label for="edit_food_name">Food:</label>
+                <input type="text" id="edit_food_name" name="food_name">
+
+                <label for="edit_calories_eaten">Calories:</label>
+                <input type="number" id="edit_calories_eaten" name="calories_eaten">
+
+                <label for="edit_food_desc">Description:</label>
+                <input type="text" id="edit_food_desc" name="food_desc">
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <a href='/'>Home</a>
+    <a href='/dashboard'>Dashboard</a>
+    <a href='/exercise'>Exercise Log</a>
+    <script>
+        function openEditModal(log) {
+            document.getElementById('edit_food_id').value = log.food_id;
+            document.getElementById('edit_food_name').value = log.food_name;
+            document.getElementById('edit_calories_eaten').value = log.calories_eaten;
+            document.getElementById('edit_food_desc').value = log.food_desc || '';
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+    </script>
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>

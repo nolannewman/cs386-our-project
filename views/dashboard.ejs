@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h1>Home</h1>
+    </header>
+
+    <main>
+        <h3>Hello <%= username %></h3>
+        
+        <h3>Maintenance calories</h3>
+        <% if (maintenance === -1) { %>
+            <p>BMR not set, calculate it now:</p>
+            <a href='/calories'>BMR calculator</a>
+        <% } else { %>
+            <p><%= Number(maintenance).toFixed(2) %></p>
+            <h3>Daily Progress</h3>
+            <% if ((Number(totalEaten) - Number(totalBurnt) > Number(maintenance))) { %>
+                <p>You have eaten more than enough food to achieve your goal today by <%= (Number(totalEaten) - Number(totalBurnt) - Number(maintenance)).toFixed(2) %></p>
+            <% } else if (Number(totalEaten) - Number(totalBurnt) < Number(maintenance)) { %>
+                <p>You need to eat <%= (Number(maintenance) + Number(totalBurnt) - Number(totalEaten)).toFixed(2) %> more calories to achieve your goal for the day.</p>
+            <% } else { %>
+                <p>You have eaten the perfect amount of calories today</p>
+            <% } %>
+        <% } %>
+
+        <h3>Calories consumed</h3>
+        <% if (totalEaten) { %>
+            <p><%= totalEaten %></p>
+        <% } else { %>
+            <p>Log some food to see your calories consumed for the day!</p>
+        <% } %>
+        <h3>Calories burnt</h3>
+        <% if (totalBurnt) { %>
+            <p><%= totalBurnt %></p>
+        <% } else { %>
+            <p>You have not exercised today lets get to steppin!</p>
+        <% } %>
+        <a href="/foodlog">Food log</a>
+        <a href="/exercise">Exercise log</a>
+        <a href="/">Home</a>
+    </main>
+
+</body>
+</html>
