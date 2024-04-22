@@ -1,0 +1,112 @@
+/* Styles for the body of the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles for the page header */
+header {
+    background: darkgrey;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Styles for the main content area */
+main {
+    padding: 20px;
+}
+
+/* Styles for each section in the main content */
+section {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Styles for forms within sections */
+form {
+    margin-top: 20px;
+}
+
+/* Styles for labels within forms */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Styles for numeric input fields */
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles for buttons */
+button {
+    background-color: lightgray;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: darkgray;
+}
+
+/* Styles for hyperlink elements */
+a {
+    color: #007BFF;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Hover effect for hyperlinks */
+a:hover {
+    text-decoration: underline;
+}
+/* Styles for the forms container */
+.forms-container {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+/* Styles for sections within the forms container */
+.forms-container section {
+    flex: 1;
+    margin: 0 10px; 
+}
+
+/* Styles for the summary container */
+.summary-container {
+    text-align: center;
+    margin-top: 20px; 
+}
+/* Footer styles */
+footer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 10px 0;
+    margin-top: auto;
+    background-color: #f4f4f4; 
+}
+
+/* Ensuring the main element occupies full height if content is less */
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
