@@ -318,7 +318,6 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 
         // If no existing user, proceed with registration
         const hashedPassword = bcrypt.hashSync(password, 8);
-        console.log(hashedPassword);
 
         userdb.query('INSERT INTO mmUser (username, email, pword, bmr) VALUES (?, ?, ?, -1)', [username, email, hashedPassword], (insertErr) => {
             if (insertErr) {
