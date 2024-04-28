@@ -8,9 +8,18 @@ body {
     padding: 0;
 }
 
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
 /* Styles for the page header */
 header {
-    background: darkgrey;
+    background: #333;
     color: #fff;
     padding: 10px 20px;
     text-align: center;
@@ -66,17 +75,19 @@ button:hover {
     background-color: darkgray;
 }
 
-/* Styles for hyperlink elements */
 a {
-    color: #007BFF;
+    color: white;
     text-decoration: none;
-    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    border-radius: 4px;
 }
 
-/* Hover effect for hyperlinks */
 a:hover {
+    background-color: #bbb;
     text-decoration: underline;
 }
+
 /* Styles for the forms container */
 .forms-container {
     display: flex; 

@@ -318,6 +318,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 
         // If no existing user, proceed with registration
         const hashedPassword = bcrypt.hashSync(password, 8);
+        console.log(hashedPassword);
 
         userdb.query('INSERT INTO mmUser (username, email, pword, bmr) VALUES (?, ?, ?, -1)', [username, email, hashedPassword], (insertErr) => {
             if (insertErr) {
@@ -370,5 +371,6 @@ function checkNotAuthenticated(req, res, next ) {
   next()
 }
 
-console.log('Server running on http://0.0.0.0:3000/');
-app.listen(3000)
+const server = app.listen(3000, () => console.log('Server running on http://0.0.0.0:3000/'));
+module.exports = app;
+

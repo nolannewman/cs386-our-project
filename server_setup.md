@@ -1,5 +1,5 @@
 1. Run the following command in terminal
-npm install dotenv express bcryptjs passport passport-local express-session body-parser mysql2 method-override connect-flash
+npm install dotenv express bcryptjs passport passport-local express-session body-parser mysql2 method-override connect-flash ejs
 
 2. Run the following command in terminal
 npm init
