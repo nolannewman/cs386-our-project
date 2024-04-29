@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Settings</title>
-<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="settingsstyle.css">
+</head>
 <body>
-	<header>
-		<h1>Settings</h1>
-	</header>
-	<p>Hello <%= name %>!</p>
-	<p>Email : <%= email %></p>
-	<form id="email-form" action="/update-email" method="POST">
-		<div>
-			<p>Change your email</p>
-			<label for="email">New Email:</label>
-			<input type="email" id="email" name="email">
-		</div>
-		<button type="submit">Change</button>
-	</form>
-	<form id="password-form" action="/update-password" method="POST">
-		<div>
-			<p>Change your password</p>
-			<label for="newpassword">New Password:</label>
-			<input type="newpassword" id="newpassword" name="newpassword">
-			<label for="oldpassword">Old Password:</label>
-			<input type="oldpassword" id="oldpassword" name="oldpassword">
-		</div>
-		<button type="submit">Change</button>
-	</form>
-	<a href='/'>Home</a>
-	<a href='/dashboard'>Dashboard</a>
+    <header>
+        <h1>Settings</h1>
+        <nav>
+            <a href='/'>Home</a>
+            <a href='/dashboard'>Dashboard</a>
+        </nav>
+    </header>
+    <main>
+        <section class="summary-container">
+            <p>Hello <%= name %>!</p>
+            <p>Email : <%= email %></p>
+        </section>
+        <div class="forms-container">
+            <section>
+                <h2>Change your email</h2>
+                <form id="email-form" action="/update-email" method="POST">
+                    <label for="email">New Email:</label>
+                    <input type="email" id="email" name="email">
+                    <button type="submit">Change</button>
+                </form>
+            </section>
+            <section>
+                <h2>Change your password</h2>
+                <form id="password-form" action="/update-password" method="POST">
+                    <label for="newpassword">New Password:</label>
+                    <input type="password" id="newpassword" name="newpassword">
+                    <label for="oldpassword">Old Password:</label>
+                    <input type="password" id="oldpassword" name="oldpassword">
+                    <button type="submit">Change</button>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Muscle Memory</p>
+    </footer>
+</body>
+</html>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {

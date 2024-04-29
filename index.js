@@ -370,5 +370,6 @@ function checkNotAuthenticated(req, res, next ) {
   next()
 }
 
-console.log('Server running on http://0.0.0.0:3000/');
-app.listen(3000)
+const server = app.listen(3000, () => console.log('Server running on http://0.0.0.0:3000/'));
+module.exports = app;
+

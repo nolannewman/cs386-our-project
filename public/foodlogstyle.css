@@ -1,0 +1,152 @@
+/* Styles for the body of the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #333;
+    border-radius: 4px;
+}
+
+a:hover {
+    background-color: #bbb;
+    text-decoration: underline;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styles for the page header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Styles for the main content area */
+main {
+    padding: 20px;
+}
+
+/* Styles for each section in the main content */
+section {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Styles for forms within sections */
+form {
+    margin-top: 20px;
+}
+
+/* Styles for labels within forms */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Styles for buttons */
+button {
+    background-color: lightgray;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: darkgray;
+}
+
+/* Hover effect for hyperlinks */
+a:hover {
+    text-decoration: underline;
+}
+/* Styles for the forms container */
+.forms-container {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+/* Styles for sections within the forms container */
+.forms-container section {
+    flex: 1;
+    margin: 0 10px; 
+}
+
+/* Styles for the summary container */
+.summary-container {
+    text-align: center;
+    margin-top: 20px; 
+}
+/* Footer styles */
+footer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 10px 0;
+    margin-top: auto;
+    background-color: #f4f4f4; 
+}
+
+/* Ensuring the main element occupies full height if content is less */
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
